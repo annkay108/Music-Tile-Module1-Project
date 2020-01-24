@@ -65,9 +65,6 @@ Game(){
 Game.prototype.startLoop = function(){
 }
 
-Game.prototype.updateSpeed = function() {
-}
-
 Game.prototype.checkOverFlow = function(){
 }
 
@@ -92,7 +89,7 @@ Player(canvas){
 Player.prototype.didClick = function(firstTile) {
 }
 
-Player.prototype.ifRightTile() = function(){
+Player.prototype.isCorrectTile = function(){
 }
 
 ```
@@ -106,9 +103,6 @@ Tiles(){
 Game.prototype.createTiles = function(){
 }
 
-Game.prototype.addingTiles = function(){
-}
-
 Game.prototype.checkClicks = function() {
 }
 
@@ -118,17 +112,10 @@ Game.prototype.checkFirstTile = function() {
 Game.prototype.displayNextTile = function() {
 }
 
-```
-
-## Music.js
-```
-Music(){
+Game.prototype.addNote = function(){
 }
 
-Music.prototype.addNote = function(){
-}
-
-Music.prototype.extractTile = function(){
+Game.prototype.extractTile = function(){
 }
 
 ```
