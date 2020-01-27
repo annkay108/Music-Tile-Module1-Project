@@ -19,7 +19,7 @@ function main() {
   function createSplashScreen() {
     splashScreen = buildDom(`
     <main>
-      <h1>Eternal Enemies</h1>
+      <h1>Music Tiles</h1>
       <button>Start</button>
     </main>`);
 
