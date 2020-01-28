@@ -21,5 +21,5 @@ Tiles.prototype.updatePosition = function() {
 }
 
 Tiles.prototype.isInsideScreen = function() {
-    return this.y + this.size > this.canvas.height;
+    return this.y < this.canvas.height;
 }
