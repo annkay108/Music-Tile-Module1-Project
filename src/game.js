@@ -18,7 +18,6 @@ Game.prototype.start = function() {
   this.canvasContainer = document.querySelector(".canvas-container");
   this.canvas = this.canvasContainer.querySelector("canvas");
   this.ctx = this.canvas.getContext("2d");
-  this.canvas.addEventListener('mousedown', this.handleMouseDown,false);
 
   this.scoreElement = this.gameScreen.querySelector(".score .value");
 
@@ -32,21 +31,14 @@ Game.prototype.start = function() {
   this.handleMouseDown = function(event) {
     var cx = event.pageX;
     var cy = event.pageY;
-
     this.tiles.forEach(function(tilesObj){
-
+      if (tilesObj.x+484 < cx && tilesObj.x+584 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy){
+        tilesObj.color = "skyblue";
+      }
     })
-//     if (event.key === "ArrowUp") {
-//       console.log("UP");
-//       this.player.setDirection("up");
-//     } else if (event.key === "ArrowDown") {
-//       console.log("DOWN");
-//       this.player.setDirection("down");
-//     }
   };
 
-  // this = game instance
-//   window.addEventListener("keydown", this.handleKeyDown.bind(this));
+  this.canvas.addEventListener('mousedown',this.handleMouseDown.bind(this));
 
   // Start the game initially
   this.startLoop();
@@ -70,7 +62,7 @@ Game.prototype.startLoop = function() {
       if(this.position.length == 0){
         random4 = Math.ceil(Math.random()*4);
         randomX= 100* random4 - 100; 
-        var newTile = new Tiles(this.canvas, randomX, 5);
+        var newTile = new Tiles(this.canvas, randomX, 2, "black");
         this.tiles.push(newTile);
         this.position.push(random4);
         this.toCheckClickedTiles = [...this.tiles];
@@ -86,14 +78,14 @@ Game.prototype.startLoop = function() {
             random4 = random4 +1;
           }
           randomX= 100* random4 - 100; 
-          var newTile = new Tiles(this.canvas, randomX, 5);
+          var newTile = new Tiles(this.canvas, randomX, 2, 'black');
           this.tiles.push(newTile);
           this.position[0] = random4;
           this.toCheckClickedTiles = [...this.tiles];
         }
         else{
           randomX= 100* random4 - 100; 
-          var newTile = new Tiles(this.canvas, randomX, 5);
+          var newTile = new Tiles(this.canvas, randomX, 2 , 'black');
           this.tiles.push(newTile);
           this.position[0] = random4;
           this.toCheckClickedTiles = [...this.tiles];
@@ -139,38 +131,3 @@ Game.prototype.removeGameScreen = function() {};
 Game.prototype.passGameOverCallback = function (gameOverFunc) {
     this.startOver = gameOverFunc;
 }
-
-// function mousePressed() {
-
-//   if (!playing) // don't allow input if the player isn't playing
-//     return;
-
-//   if (mouseY >= 3 * HEIGHT && mouseY <= 4 * HEIGHT) {
-// 		// check if click is within canvas bounds
-
-//     var tile = getClickedTile(mouseX, mouseY);
-
-//     if (tile == -1) // they clicked out of bounds
-//       return;
-
-//     if (tiles[tile] !== 0) {
-//       /* end game */
-
-//       tiles[tile] = -1;
-
-//       won = false;
-//       playing = false;
-//     } else {
-//       score++;
-//       newRow();
-
-//       if (score >= WINNING_SCORE) {
-//         /* end game */
-
-//         won = true;
-//         playing = false;
-//       }
-//     }
-//   }
-
-// }
