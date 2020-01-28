@@ -45,47 +45,32 @@ Game.prototype.start = function() {
   // Start the game initially
   this.startLoop();
 };
+Game.prototype.checkIfTop = function(){
+  var arr = this.tiles;
+  if (arr.length != 0){
+    var arrObj = arr[arr.length -1];
+    return arrObj.y == 0;
+  }
+  return true;
+};
 
 Game.prototype.startLoop = function() {
   var loop = function() {
-
-    // this.score++;
-    // this.scoreElement.innerHTML = this.score;
-
-    // 1. UPDATE THE STATE (game, player, enemy)
-
-    // 0. Player was created already
-
-    // 1. Create tiles randomly
-
-    if (Math.random() > 0.98) {
+    
+    if (this.checkIfTop())
+    {
       var random4 = Math.ceil(Math.random()*4);
-      var randomX= 100* random4 - 100;
-      console.log(this.canvas.width);
+      var randomX= 100* random4 - 100; 
       var newTile = new Tiles(this.canvas, randomX, 5);
-
       this.tiles.push(newTile);
     }
 
-    // 4. Update the existing tiles (move them)
-    // 5. Check if the tiles our out of the screen
-    // [x, x, x ,x ]
-
-    // this.tiles = this.tiles.filter(function(tileObj) {
-    //   tileObj.updatePosition(); // 4
-    //   // console.log("updatePosition");
-    //   return tileObj.isInsideScreen(); // 5
-    // });
-
+    this.checkIfTop();
     this.tiles.forEach(function(tileObj){
       tileObj.updatePosition();
     });
     // 2. CLEAR THE CANVAS
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    // 3. UPDATE THE CANVAS (DRAW)
-    // 1. Draw the player
-    // this.player.draw();
 
     // 2. Draw all of the tiles
     this.tiles.forEach(function(tileObj) {
@@ -99,7 +84,6 @@ Game.prototype.startLoop = function() {
     }
   }.bind(this);
 
-  // requestAnimationFrame(loop);
   loop();
 };
 
@@ -113,21 +97,33 @@ Game.prototype.gameOver = function() {
 
 Game.prototype.removeGameScreen = function() {};
 
-// Game.prototype.checkCollisions = function() {
-//     this.tiles.forEach(function(enemy){
-//         if(this.player.didCollide(enemy)){
-//             this.player.removeLife();
-//             console.log('lives', this.player.lives);
-//             //move the enemy out of the screen
-//             enemy.x = 0 - enemy.size;
-
-//             if(this.player.lives === 0){
-//                 this.gameOver();
-//             }
-//         }
-//     },this);
-// };
-
 Game.prototype.passGameOverCallback = function (gameOverFunc) {
     this.startOver = gameOverFunc;
 }
+
+// Game.prototype.tileSpawn = function() {
+
+//   var random4 = Math.ceil(Math.random()*4);
+//   var randomX= 100* random4 - 100;
+//   console.log(this.canvas.width); 
+//   var newTile = new Tiles(this.canvas, randomX, 5);
+
+//   this.tiles.push(newTile);
+
+
+
+
+
+//   var randomNum = Math.floor(Math.random() * 4);
+//   console.log(randomNum);
+//   var randomX = this.columnX[randomNum];
+//   var randomXIsBusy = this.columnIsBusy[randomNum];
+//   if (randomXIsBusy) return;
+//   var newEnemy = new Enemy(this.canvas, randomX, 4, “./img/car1.png”);
+//   this.columnIsBusy[randomNum] = true;
+//   this.enemies.push(newEnemy);
+//   // }
+//   setTimeout(() => {
+//     this.columnIsBusy[randomNum] = false;
+//   }, 1200);
+// };
