@@ -15,27 +15,37 @@ function Game() {
 
 // Initialize the game and canvas
 Game.prototype.start = function() {
+  this.counter = 0;
   this.canvasContainer = document.querySelector(".canvas-container");
   this.canvas = this.canvasContainer.querySelector("canvas");
   this.ctx = this.canvas.getContext("2d");
 
   this.scoreElement = this.gameScreen.querySelector(".score .value");
+  this.audio = document.getElementById("audio");
+  var playAudio = function (){
+    this.audio.play();
+  }.bind(this);
+  function pauseAudio(){
+    this.audio.pause();
+  }
+  playAudio();
+
 
   var containerHeight = this.canvasContainer.offsetHeight;
 
   this.canvas.setAttribute("width", 400);
   this.canvas.setAttribute("height", containerHeight);
   this.canvas.setAttribute("style", "border: 1px solid black");
+  
 
   // Add mousedown event listeners
   this.handleMouseDown = function(event) {
+    var windowWidth = window.innerWidth/2 - 200;
     var cx = event.pageX;
     var cy = event.pageY;
-    console.log(cx+"  "+ cy);
     this.toCheckClickedTiles = [...this.tiles];
     this.tiles.forEach(function(tilesObj,i){
-      
-      var boolClick = tilesObj.x+484 < cx && tilesObj.x+584 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy;
+      var boolClick = tilesObj.x+windowWidth <cx && tilesObj.x+windowWidth+100 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy;
       if (i == 0 && boolClick){
         tilesObj.color = "skyblue";
       }
@@ -61,7 +71,10 @@ Game.prototype.checkIfTop = function(){
 
 Game.prototype.startLoop = function() {
   var loop = function() {
-    
+    this.counter++;
+    var widths = window.innerWidth;
+    var heights = window.innerHeight;
+
     if (this.checkIfTop())
     {
       var random4;
@@ -69,7 +82,7 @@ Game.prototype.startLoop = function() {
       if(this.position.length == 0){
         random4 = Math.ceil(Math.random()*4);
         randomX= 100* random4 - 100; 
-        var newTile = new Tiles(this.canvas, randomX, 2, "black");
+        var newTile = new Tiles(this.canvas, randomX, 3, "black");
         this.tiles.push(newTile);
         this.position.push(random4);
       }
@@ -84,18 +97,17 @@ Game.prototype.startLoop = function() {
             random4 = random4 +1;
           }
           randomX= 100* random4 - 100; 
-          var newTile = new Tiles(this.canvas, randomX, 2, 'black');
+          var newTile = new Tiles(this.canvas, randomX, 3, 'black');
           this.tiles.push(newTile);
           this.position[0] = random4;
         }
         else{
           randomX= 100* random4 - 100; 
-          var newTile = new Tiles(this.canvas, randomX, 2 , 'black');
+          var newTile = new Tiles(this.canvas, randomX, 3, 'black');
           this.tiles.push(newTile);
           this.position[0] = random4;
         }
       }
-      
     }
 
     this.checkIfTop();
