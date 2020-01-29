@@ -104,9 +104,7 @@ function main() {
 
   function gameOver() {
     removeGameScreen();
-    createGameOverScreen(); // <--
-
-    console.log("GAME OVER IN MAIN");
+    createGameOverScreen(); 
   }
 
   // Initialize the start screen

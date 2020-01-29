@@ -31,11 +31,18 @@ Game.prototype.start = function() {
   this.handleMouseDown = function(event) {
     var cx = event.pageX;
     var cy = event.pageY;
-    this.tiles.forEach(function(tilesObj){
-      if (tilesObj.x+484 < cx && tilesObj.x+584 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy){
+    console.log(cx+"  "+ cy);
+    this.toCheckClickedTiles = [...this.tiles];
+    this.tiles.forEach(function(tilesObj,i){
+      
+      var boolClick = tilesObj.x+484 < cx && tilesObj.x+584 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy;
+      if (i == 0 && boolClick){
         tilesObj.color = "skyblue";
       }
-    })
+      else if (boolClick && this.tiles[i-1].color==='skyblue'){
+        tilesObj.color = "skyblue";
+      }
+    }.bind(this))
   };
 
   this.canvas.addEventListener('mousedown',this.handleMouseDown.bind(this));
@@ -65,7 +72,6 @@ Game.prototype.startLoop = function() {
         var newTile = new Tiles(this.canvas, randomX, 2, "black");
         this.tiles.push(newTile);
         this.position.push(random4);
-        this.toCheckClickedTiles = [...this.tiles];
       }
 
       else{
@@ -81,14 +87,12 @@ Game.prototype.startLoop = function() {
           var newTile = new Tiles(this.canvas, randomX, 2, 'black');
           this.tiles.push(newTile);
           this.position[0] = random4;
-          this.toCheckClickedTiles = [...this.tiles];
         }
         else{
           randomX= 100* random4 - 100; 
           var newTile = new Tiles(this.canvas, randomX, 2 , 'black');
           this.tiles.push(newTile);
           this.position[0] = random4;
-          this.toCheckClickedTiles = [...this.tiles];
         }
       }
       
@@ -98,8 +102,12 @@ Game.prototype.startLoop = function() {
 
     this.tiles = this.tiles.filter(function(tilesObj) {
       tilesObj.updatePosition(); // 4
-      return tilesObj.isInsideScreen(); // 5
-    });
+      var isInScreen = tilesObj.isInsideScreen();
+      if(isInScreen== false && tilesObj.color == "black"){
+        this.gameOver();
+      }
+      return isInScreen; // 5
+    }.bind(this));
     
     // 2. CLEAR THE CANVAS
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
