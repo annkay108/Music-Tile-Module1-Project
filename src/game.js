@@ -40,16 +40,7 @@ function Game() {
 
       this.tiles.forEach(function(tilesObj,i){
         var boolClick = tilesObj.x+windowWidth <cx && tilesObj.x+windowWidth+100 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy;
-        var anyOtherClick = tilesObj.x+windowWidth >cx && tilesObj.x+windowWidth+100 < cx && tilesObj.y+44 >cy && tilesObj.y + 194<cy;
-        
         if (i == 0 && boolClick){
-          // console.log("what is this",this);
-          // this.audio.play();
-          // var intervalID = setTimeout(function() { 
-          //   console.log("inside settimeout");
-          //   this.audio.pause(); 
-          // }, 500).bind(this);
-          // clearTimeout(intervalID);
           this.score ++;
           this.scoreElement.innerHTML = this.score;
           tilesObj.color = "skyblue";
@@ -58,9 +49,6 @@ function Game() {
           this.score++;
           this.scoreElement.innerHTML = this.score;
           tilesObj.color = "skyblue";
-        }
-        else if(anyOtherClick){
-          this.gameOver();
         }
       }.bind(this))
     };
