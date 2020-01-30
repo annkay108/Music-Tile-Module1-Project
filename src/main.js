@@ -14,7 +14,7 @@ function main() {
   var game;
   var splashScreen;
   var gameOverScreen;
-
+  var audio = new Audio('../Songs/Queen_Bohemian.mp3');
   // SPLASH SCREEN
   function createSplashScreen() {
     splashScreen = buildDom(`
@@ -50,8 +50,10 @@ function main() {
     <div class="canvas-container">
       <canvas></canvas>
     </div>
-  </main>
+    </main>
     `);
+    audio.play();
+    audio.currentTime = 3;
 
     document.body.appendChild(gameScreen);
 
@@ -59,6 +61,7 @@ function main() {
   }
 
   function removeGameScreen() {
+    audio.pause();
     game.gameScreen.remove(); // We will implement it in the game object
   }
 

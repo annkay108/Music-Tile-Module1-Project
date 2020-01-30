@@ -10,6 +10,8 @@ html {
   body {
     margin: 0;
     padding: 0;
+    background-image: url(../images/musical-tiles.jpg);
+    background-size: cover;
   }
   
   
@@ -82,7 +84,7 @@ html {
   }
 
   .game .canvas-container canvas{
-    background: url('https://i.pinimg.com/originals/ec/84/64/ec8464c4b82088962662ec3af2ec7beb.jpg');
+    background-image: url(../images/starryNights1.jpg);
     background-size: cover;
   }
 

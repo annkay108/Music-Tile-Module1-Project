@@ -13,8 +13,10 @@ function Game() {
   this.gameIsOver = false;
   this.gameScreen = null;
   this.counterSpeed = 0;
-  // Initialize the game and canvas
+
+  // Initialize the game and canvas 
   Game.prototype.start = function() {
+    console.log(this.audio);
     this.counter = 0;
     this.canvasContainer = document.querySelector(".canvas-container");
     this.canvas = this.canvasContainer.querySelector("canvas");
@@ -26,7 +28,7 @@ function Game() {
     var containerHeight = this.canvasContainer.offsetHeight;
     
     this.canvas.setAttribute("width", 400);
-    this.canvas.setAttribute("height", containerHeight);
+    this.canvas.setAttribute("height", 600);
     this.canvas.setAttribute("style", "border: 1px solid black");
     
     // Add mousedown event listeners
@@ -35,10 +37,19 @@ function Game() {
       var cx = event.pageX;
       var cy = event.pageY;
       this.toCheckClickedTiles = [...this.tiles];
+
       this.tiles.forEach(function(tilesObj,i){
         var boolClick = tilesObj.x+windowWidth <cx && tilesObj.x+windowWidth+100 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy;
         var anyOtherClick = tilesObj.x+windowWidth >cx && tilesObj.x+windowWidth+100 < cx && tilesObj.y+44 >cy && tilesObj.y + 194<cy;
+        
         if (i == 0 && boolClick){
+          // console.log("what is this",this);
+          // this.audio.play();
+          // var intervalID = setTimeout(function() { 
+          //   console.log("inside settimeout");
+          //   this.audio.pause(); 
+          // }, 500).bind(this);
+          // clearTimeout(intervalID);
           this.score ++;
           this.scoreElement.innerHTML = this.score;
           tilesObj.color = "skyblue";
@@ -62,7 +73,7 @@ function Game() {
 }
 
   Game.prototype.checkIfTop = function(){
-    var arr = this.tiles;
+  var arr = this.tiles;
   if (arr.length != 0){
     var arrObj = arr[arr.length -1];
     return arrObj.y == 0;
@@ -87,8 +98,9 @@ Game.prototype.startLoop = function() {
         var newTile = new Tiles(this.canvas, randomX, "black");
         this.tiles.push(newTile);
         if(this.counterSpeed >= 300) this.speed = 5;
-        else if(this.counterSpeed <= 301 && this.counterSpeed >= 800){
-          this.speed = 7;
+        else if(this.counterSpeed >= 800){
+          console.log("this.speed");
+          this.speed = 5;
         }
         this.position.push(random4);
       }
@@ -110,8 +122,9 @@ Game.prototype.startLoop = function() {
           {
             this.speed = 5;
           }
-          else if(this.counterSpeed <=301 && this.counterSpeed >= 800){
-            this.speed = 7;
+          else if(this.counterSpeed >= 800){
+            console.log("this.speed");
+            this.speed = 5;
           }
           this.position[0] = random4;
         }
@@ -120,8 +133,9 @@ Game.prototype.startLoop = function() {
           var newTile = new Tiles(this.canvas, randomX, 'black');
           this.tiles.push(newTile);
           if(this.counterSpeed >= 300) this.speed = 5;
-          else if(this.counterSpeed <=301 && this.counterSpeed >= 800){
-            this.speed = 7;
+          else if(this.counterSpeed >= 800){
+            console.log("this.speed");
+            this.speed = 5;
           }
           this.position[0] = random4;
         }
