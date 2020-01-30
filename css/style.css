@@ -80,3 +80,43 @@ html {
   .game .canvas-container {
     flex: 1;
   }
+
+  .game .canvas-container canvas{
+    background: url('https://i.pinimg.com/originals/ec/84/64/ec8464c4b82088962662ec3af2ec7beb.jpg');
+    background-size: cover;
+  }
+
+  #fill {
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../images/musical-tiles.jpg);
+    font-family: 'Amatic SC', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #fill h1{
+    font-size: 72px;
+    color: rgb(17, 71, 141);
+  }
+
+#fill button{
+  margin-top: 50px;
+  padding: 10px 20px;
+  background-color: #62acc7;
+  color: black;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+ #fill button:hover{
+  transform: scale(1.2);
+ }
+
+ #score{
+   font-size: 40px;
+ }

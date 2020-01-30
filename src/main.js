@@ -18,8 +18,8 @@ function main() {
   // SPLASH SCREEN
   function createSplashScreen() {
     splashScreen = buildDom(`
-    <main>
-      <h1>Music Tiles</h1>
+    <main id = "fill">
+      <h1 id = "title">Musical Tiles</h1>
       <button>Start</button>
     </main>`);
 
@@ -66,9 +66,9 @@ function main() {
   // GAME OVER SCREEN
   function createGameOverScreen(score) {
     gameOverScreen = buildDom(`
-    <main>
+    <main id= "fill">
       <h1>Game over</h1>
-      <p>Your score: <span>${score}</span></p>
+      <p id = "score" >Your score: <span>${score}</span></p>
       <button>Restart</button>
     </main>
     `);
@@ -104,7 +104,7 @@ function main() {
 
   function gameOver() {
     removeGameScreen();
-    createGameOverScreen(); 
+    createGameOverScreen(game.score); 
   }
 
   // Initialize the start screen
