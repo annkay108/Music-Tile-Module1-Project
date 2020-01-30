@@ -14,7 +14,7 @@ function main() {
   var game;
   var splashScreen;
   var gameOverScreen;
-  var audio = new Audio('../Songs/Queen_Bohemian.mp3');
+  var audio = new Audio('Songs/Queen_Bohemian.mp3');
   // SPLASH SCREEN
   function createSplashScreen() {
     splashScreen = buildDom(`
