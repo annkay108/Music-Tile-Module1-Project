@@ -9,6 +9,7 @@ function Game() {
   this.player = null;
   this.position = [];
   this.score = 0;
+  this.key = 1;
 
   this.gameIsOver = false;
   this.gameScreen = null;
@@ -16,16 +17,12 @@ function Game() {
 
   // Initialize the game and canvas 
   Game.prototype.start = function() {
-    console.log(this.audio);
     this.counter = 0;
     this.canvasContainer = document.querySelector(".canvas-container");
     this.canvas = this.canvasContainer.querySelector("canvas");
     this.ctx = this.canvas.getContext("2d");
     
     this.scoreElement = this.gameScreen.querySelector(".score .value");
-    this.audio = document.getElementById("audio");
-    
-    var containerHeight = this.canvasContainer.offsetHeight;
     
     this.canvas.setAttribute("width", 400);
     this.canvas.setAttribute("height", 600);
@@ -33,6 +30,13 @@ function Game() {
     
     // Add mousedown event listeners
     this.handleMouseDown = function(event) {
+      this.audio = document.querySelector(`audio[data-key="${this.key}"]`)
+      if(this.key < 17){
+        this.key++;
+      }
+      else{
+        this.key = 1;
+      }
       var windowWidth = window.innerWidth/2 - 200;
       var cx = event.pageX;
       var cy = event.pageY;
@@ -41,11 +45,13 @@ function Game() {
       this.tiles.forEach(function(tilesObj,i){
         var boolClick = tilesObj.x+windowWidth <cx && tilesObj.x+windowWidth+100 > cx && tilesObj.y+44 <cy && tilesObj.y + 194>cy;
         if (i == 0 && boolClick){
+          this.audio.play();
           this.score ++;
           this.scoreElement.innerHTML = this.score;
           tilesObj.color = "skyblue";
         }
         else if (boolClick && this.tiles[i-1].color==='skyblue'){
+          this.audio.play();
           this.score++;
           this.scoreElement.innerHTML = this.score;
           tilesObj.color = "skyblue";
@@ -85,10 +91,9 @@ Game.prototype.startLoop = function() {
         randomX= 100* random4 - 100; 
         var newTile = new Tiles(this.canvas, randomX, "black");
         this.tiles.push(newTile);
-        if(this.counterSpeed >= 300) this.speed = 5;
+        if(this.counterSpeed >= 300 && this.counterSpeed <=800) this.speed = 5;
         else if(this.counterSpeed >= 800){
-          console.log("this.speed");
-          this.speed = 5;
+          this.speed = 6;
         }
         this.position.push(random4);
       }
@@ -105,14 +110,12 @@ Game.prototype.startLoop = function() {
           randomX= 100* random4 - 100; 
           var newTile = new Tiles(this.canvas, randomX, 'black');
           this.tiles.push(newTile);
-          console.log(this.counterSpeed);
-          if(this.counterSpeed >= 300) 
+          if(this.counterSpeed >= 300 && this.counterSpeed <=800) 
           {
             this.speed = 5;
           }
-          else if(this.counterSpeed >= 800){
-            console.log("this.speed");
-            this.speed = 5;
+          else if(this.counterSpeed > 800){
+            this.speed = 6;
           }
           this.position[0] = random4;
         }
@@ -120,10 +123,9 @@ Game.prototype.startLoop = function() {
           randomX= 100* random4 - 100; 
           var newTile = new Tiles(this.canvas, randomX, 'black');
           this.tiles.push(newTile);
-          if(this.counterSpeed >= 300) this.speed = 5;
-          else if(this.counterSpeed >= 800){
-            console.log("this.speed");
-            this.speed = 5;
+          if(this.counterSpeed >= 300 && this.counterSpeed <=800) this.speed = 5;
+          else if(this.counterSpeed > 800 ){
+            this.speed = 6;
           }
           this.position[0] = random4;
         }

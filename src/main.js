@@ -24,7 +24,6 @@ function main() {
     </main>`);
 
     document.body.appendChild(splashScreen);
-
     var startButton = splashScreen.querySelector("button");
 
     startButton.addEventListener("click", function() {
@@ -52,8 +51,6 @@ function main() {
     </div>
     </main>
     `);
-    audio.play();
-    audio.currentTime = 3;
 
     document.body.appendChild(gameScreen);
 
@@ -61,7 +58,6 @@ function main() {
   }
 
   function removeGameScreen() {
-    audio.pause();
     game.gameScreen.remove(); // We will implement it in the game object
   }
 
@@ -77,7 +73,8 @@ function main() {
     `);
 
     document.body.appendChild(gameOverScreen);
-
+    audio.play();
+    audio.currentTime = 3;
     var button = gameOverScreen.querySelector("button");
 
     button.addEventListener("click", startGame);
@@ -86,6 +83,7 @@ function main() {
   function removeGameOverScreen() {
     if (gameOverScreen !== undefined) { // if it exists saved in a variable
       gameOverScreen.remove();
+      audio.pause();
     }
   }
 
