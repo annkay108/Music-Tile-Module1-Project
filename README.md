@@ -1,7 +1,7 @@
 # Music Tiles
 
 ## Description
-Music Tiles is a single-player game where the player needs to click on the black tiles as they appear on the screen. The player has to click on the buttom tiles sequentially, if other tiles are clicked other than the buttom tiles, the game would be over. If the player is not able to click on the buttom tile before it passes then the game will be over. When each tile is clicked it's going to play a note, hence playing a song as you play.
+Music Tiles is a single-player game where the player needs to click on the black tiles as they appear on the screen. The player has to click on the buttom tiles sequentially. If the player is not able to click on the buttom tile before it passes then the game will be over. When each tile is clicked it's going to play a note, hence playing a song as you play.
 
 ## MVP (DOM - CANVAS)
 CANVAS, This is a game where the player can click on the tiles to play a note.
